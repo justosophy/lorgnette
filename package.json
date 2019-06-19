@@ -1,0 +1,33 @@
+{
+  "name": "lorgnette",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Justin Anderson (https://github.com/justosophy)",
+  "dependencies": {
+    "flow-bin": "^0.102.0-rc",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "flow": "flow"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
