@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/lorgnette/static/css/main.b248f3a7.chunk.css",
+    "main.js": "/lorgnette/static/js/main.d11a1835.chunk.js",
+    "main.js.map": "/lorgnette/static/js/main.d11a1835.chunk.js.map",
+    "runtime~main.js": "/lorgnette/static/js/runtime~main.29982c2a.js",
+    "runtime~main.js.map": "/lorgnette/static/js/runtime~main.29982c2a.js.map",
+    "static/js/2.3310f33a.chunk.js": "/lorgnette/static/js/2.3310f33a.chunk.js",
+    "static/js/2.3310f33a.chunk.js.map": "/lorgnette/static/js/2.3310f33a.chunk.js.map",
+    "index.html": "/lorgnette/index.html",
+    "precache-manifest.6f0118f3a1a6e7b0897c47779b88d454.js": "/lorgnette/precache-manifest.6f0118f3a1a6e7b0897c47779b88d454.js",
+    "service-worker.js": "/lorgnette/service-worker.js",
+    "static/css/main.b248f3a7.chunk.css.map": "/lorgnette/static/css/main.b248f3a7.chunk.css.map"
+  }
+}
