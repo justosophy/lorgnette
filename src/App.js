@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import classnames from "classnames";
 
@@ -12,10 +12,14 @@ import { debouncedSearch } from "./data";
 
 import SearchInput from "./components/SearchInput";
 
+type HeaderRef = {| current: null |} | HTMLElement | null;
+
 function App() {
   const [searchTerm, updateSearchTerm] = useState("");
   const [searchResults, updateSearchResults] = useState([]);
   const [emptyResults, updateEmptyResults] = useState(false);
+
+  let header = useRef(null);
 
   useEffect(() => {
     debouncedSearch(searchTerm, updateSearchResults);
@@ -38,6 +42,7 @@ function App() {
         className={classnames("App-header", {
           "App-header-results": searchResults.length > 0
         })}
+        ref={el => (header = el)}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -106,7 +111,12 @@ function App() {
                       <button
                         type="button"
                         title={`Search for "${tag}"`}
-                        onClick={() => updateSearchTerm(tag)}
+                        onClick={() => {
+                          if (header instanceof HTMLElement) {
+                            header.scrollIntoView();
+                          }
+                          updateSearchTerm(tag);
+                        }}
                         key={tag}
                       >
                         {tag}
