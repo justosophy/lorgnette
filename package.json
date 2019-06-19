@@ -5,7 +5,7 @@
   "author": "Justin Anderson (https://github.com/justosophy)",
   "homepage": "https://justosophy.github.io/lorgnette",
   "dependencies": {
-    "flow-bin": "^0.102.0-rc",
+    "flow-bin": "0.101.0",
     "gh-pages": "^2.0.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
