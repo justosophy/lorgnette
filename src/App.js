@@ -1,11 +1,28 @@
 // @flow
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./App.css";
 
-import SearchInput from './components/SearchInput'
+import SearchInput from "./components/SearchInput";
+import debounce from "./tooling/debounce";
+
+const logSearch = (searchTerm: string = "") => {
+  const search = searchTerm.trim();
+  if (search.length > 0) {
+    console.log({ search });
+  }
+};
+
+const debouncedLogSearch = debounce(logSearch, 250);
 
 function App() {
+  const [searchTerm, updateSearchTerm] = useState("");
+
+  useEffect(
+    () => debouncedLogSearch(searchTerm),
+    [searchTerm]
+  );
+
   return (
     <div className="App">
       <header className="App-header">
@@ -22,7 +39,14 @@ function App() {
           <circle cx="7" cy="21" r="3" strokeWidth="0" fill="#0063DC" />
           <circle cx="25" cy="21" r="3" strokeWidth="0" fill="#FF0084" />
         </svg>
-        <SearchInput />
+        <SearchInput
+          value={searchTerm}
+          onChange={(event: SyntheticInputEvent<HTMLInputElement>) => {
+            if (event.currentTarget instanceof HTMLInputElement) {
+              updateSearchTerm(event.currentTarget.value);
+            }
+          }}
+        />
       </header>
     </div>
   );

@@ -1,13 +1,26 @@
-import React, { useRef, useEffect } from "react";
-
+import React, { useRef, useEffect, useState } from 'react'
+// import type { Element } from 'react'
 import "./style.css";
 
-const SearchInput = () => {
-  let input = useRef(null);
+type SearchInputProps = {|
+  value: string,
+  onChange: Function,
+|}
+
+type InputRef = {| current: null |} | HTMLInputElement | null
+
+const SearchInput = ({ value, onChange } : SearchInputProps) => {
+  let input: InputRef = useRef(null);
+
+  const [initialLoad, updateInitialLoad] = useState(true)
 
   useEffect(() => {
-      input.focus()
-  });
+      if (input instanceof HTMLInputElement && initialLoad) {
+        input.focus()
+        updateInitialLoad(false)
+      }
+  }, [initialLoad]);
+
   return (
     <div className="search-input-container">
       <input
@@ -19,6 +32,8 @@ const SearchInput = () => {
         ref={el => (input = el)}
         placeholder="Search flickr"
         maxLength={50}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
