@@ -1,24 +1,29 @@
-import React, { useRef, useEffect, useState } from 'react'
-// import type { Element } from 'react'
+import React, { useRef, useEffect, useState } from "react";
+import classnames from "classnames";
 import "./style.css";
 
 type SearchInputProps = {|
   value: string,
   onChange: Function,
-|}
+  badState?: boolean
+|};
 
-type InputRef = {| current: null |} | HTMLInputElement | null
+type InputRef = {| current: null |} | HTMLInputElement | null;
 
-const SearchInput = ({ value, onChange } : SearchInputProps) => {
+const SearchInput = ({
+  value,
+  onChange,
+  badState = false
+}: SearchInputProps) => {
   let input: InputRef = useRef(null);
 
-  const [initialLoad, updateInitialLoad] = useState(true)
+  const [initialLoad, updateInitialLoad] = useState(true);
 
   useEffect(() => {
-      if (input instanceof HTMLInputElement && initialLoad) {
-        input.focus()
-        updateInitialLoad(false)
-      }
+    if (input instanceof HTMLInputElement && initialLoad) {
+      input.focus();
+      updateInitialLoad(false);
+    }
   }, [initialLoad]);
 
   return (
@@ -26,7 +31,9 @@ const SearchInput = ({ value, onChange } : SearchInputProps) => {
       <input
         type="search"
         id="search-input"
-        className="search-input"
+        className={classnames("search-input", {
+          "search-input--bad-state": !!badState
+        })}
         name="q"
         aria-label="Search flickr"
         ref={el => (input = el)}

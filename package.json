@@ -5,8 +5,12 @@
   "author": "Justin Anderson (https://github.com/justosophy)",
   "homepage": "https://justosophy.github.io/lorgnette",
   "dependencies": {
+    "classnames": "^2.2.6",
+    "date-fns": "^1.30.1",
     "flow-bin": "0.101.0",
     "gh-pages": "^2.0.1",
+    "jsonp": "^0.2.1",
+    "querystring": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-scripts": "3.0.1"
