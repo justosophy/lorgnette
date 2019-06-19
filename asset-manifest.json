@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/lorgnette/static/css/main.06d9f751.chunk.css",
-    "main.js": "/lorgnette/static/js/main.a6cfb7fc.chunk.js",
-    "main.js.map": "/lorgnette/static/js/main.a6cfb7fc.chunk.js.map",
+    "main.css": "/lorgnette/static/css/main.3a4d2070.chunk.css",
+    "main.js": "/lorgnette/static/js/main.16fe98f7.chunk.js",
+    "main.js.map": "/lorgnette/static/js/main.16fe98f7.chunk.js.map",
     "runtime~main.js": "/lorgnette/static/js/runtime~main.29982c2a.js",
     "runtime~main.js.map": "/lorgnette/static/js/runtime~main.29982c2a.js.map",
-    "static/js/2.c2695c00.chunk.js": "/lorgnette/static/js/2.c2695c00.chunk.js",
-    "static/js/2.c2695c00.chunk.js.map": "/lorgnette/static/js/2.c2695c00.chunk.js.map",
+    "static/js/2.4f9692d0.chunk.js": "/lorgnette/static/js/2.4f9692d0.chunk.js",
+    "static/js/2.4f9692d0.chunk.js.map": "/lorgnette/static/js/2.4f9692d0.chunk.js.map",
     "index.html": "/lorgnette/index.html",
-    "precache-manifest.a3e8250c677bdbea1b1f8a595db6c828.js": "/lorgnette/precache-manifest.a3e8250c677bdbea1b1f8a595db6c828.js",
+    "precache-manifest.b24fc0dcffb65d0379b0489046269964.js": "/lorgnette/precache-manifest.b24fc0dcffb65d0379b0489046269964.js",
     "service-worker.js": "/lorgnette/service-worker.js",
-    "static/css/main.06d9f751.chunk.css.map": "/lorgnette/static/css/main.06d9f751.chunk.css.map"
+    "static/css/main.3a4d2070.chunk.css.map": "/lorgnette/static/css/main.3a4d2070.chunk.css.map"
   }
 }
