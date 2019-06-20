@@ -2,24 +2,30 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
 .App-header {
-  min-height: 80vh;
+  padding-top: 15vh;
+  padding-left: 2rem;
+  padding-right: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
-  transition: min-height 0.4s;
+  transition: padding-top 0.4s;
 }
 
 .App-header.App-header-results {
-  min-height: 40vh;
+  padding-top: 0;
+}
+
+@media (orientation: portrait) {
+  .App-header {
+    padding-top: 5vh;
+  }
+  .App-header.App-header-results {
+    min-height: 0;
+  }
 }
 
 .App-link {
@@ -74,11 +80,13 @@
   outline: none;
 }
 
-.result-details a:focus, .result-details a:hover {
+.result-details a:focus,
+.result-details a:hover {
   color: dodgerblue;
 }
 
-.result-details a:focus img, .result-details a:hover img{
+.result-details a:focus img,
+.result-details a:hover img {
   border: solid 1px dodgerblue;
 }
 
@@ -100,13 +108,13 @@
   padding: 0.1em 0.25em;
 }
 
-.result-details button:focus, .result-details button:hover {
+.result-details button:focus,
+.result-details button:hover {
   outline: none;
   text-decoration: underline;
   color: dodgerblue;
 }
 
 .result-details button:active {
-  color: #FF0084;
+  color: #ff0084;
 }
-

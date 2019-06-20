@@ -21,15 +21,24 @@ const doSearch = async (
   };
   const q = querystring.encode(obj);
 
-  jsonp(url + "?" + q, { name: "jsonFlickrFeed" }, function(err, data) {
-    if (err) {
-      // console.log({ err })
-      updateSearchResults([]);
-      return;
-    }
-    //   console.log({ data })
-    updateSearchResults(data.items);
-  });
+  try {
+    jsonp(
+      url + "?" + q,
+      { name: "jsonFlickrFeed" },
+      function(err, data) {
+        if (err) {
+          // console.log({ err })
+          updateSearchResults([]);
+          return;
+        }
+        //   console.log({ data })
+        updateSearchResults(data.items);
+      },
+      { timeout: 10000 }
+    );
+  } catch (e) {
+    console.log("dude");
+  }
 };
 
 const debouncedSearch = debounce(doSearch, 250);
