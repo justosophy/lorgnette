@@ -10,8 +10,9 @@ import "./App.css";
 
 import { debouncedSearch } from "./data";
 
-import Logo from "./components/Logo"
+import Logo from "./components/Logo";
 import SearchInput from "./components/SearchInput";
+import Tags from "./components/Tags";
 
 type HeaderRef = {| current: null |} | HTMLElement | null;
 
@@ -43,6 +44,7 @@ function App() {
         className={classnames("App-header", {
           "App-header-results": searchResults.length > 0
         })}
+        ref={el => (header = el)}
       >
         <div className="App-lockup">
           <Logo />
@@ -59,12 +61,12 @@ function App() {
       </header>
       <main className="search-results">
         <ul>
-          {searchResults.map(result => (
-            <li key={result.media.m}>
-              <ul className="result-details">
-                <li>
-                  <div>image</div>
-                  <div>
+          {searchResults.map(result => {
+            const author = result.author.match(/"([^"]+)"/)[1];
+            return (
+              <li key={result.media.m}>
+                <ul className="result-details">
+                  <li className="result-thumbnail">
                     <a
                       href={result.link}
                       target="_blank"
@@ -73,11 +75,9 @@ function App() {
                     >
                       <img src={result.media.m} alt={result.title} />
                     </a>
-                  </div>
-                </li>
-                <li>
-                  <div>author</div>
-                  <div>
+                  </li>
+                  <li>
+                    by{" "}
                     <a
                       href={`https://www.flickr.com/photos/${
                         result.author_id
@@ -86,22 +86,14 @@ function App() {
                       rel="noopener noreferrer"
                     >
                       {result.author.match(/"([^"]+)"/)[1]}
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div>date_taken</div>
-                  <div>
-                    {formatDate(parseDate(result.date_taken), "MMMM D YYYY")}
-                  </div>
-                </li>
-                <li>
-                  <div>tags</div>
-                  <div>
-                    {result.tags.split(" ").map(tag => (
+                    </a>{" "}
+                    on {formatDate(parseDate(result.date_taken), "MMMM D YYYY")}
+                  </li>
+                  <li>
+                    {/* {result.tags.split(" ").map(tag => (
                       <button
                         type="button"
-                        title={`Search for "${tag}"`}
+                        title={`Search for '${tag}'`}
                         onClick={() => {
                           if (header instanceof HTMLElement) {
                             header.scrollIntoView();
@@ -112,12 +104,31 @@ function App() {
                       >
                         {tag}
                       </button>
-                    ))}
-                  </div>
-                </li>
-                <li>
-                  <div>link</div>
-                  <div>
+                    ))} */}
+                    <Tags
+                      title={result.title}
+                      tagsList={result.tags.split(" ")}
+                      maxLength={10}
+                      handler={
+                        tag => {
+                          if (header instanceof HTMLElement) {
+                            header.scrollIntoView();
+                          }
+                          updateSearchTerm(tag);
+                        }
+                      }
+                    />
+                    {/* <button
+                      type="button"
+                      title={`More tags for '${result.title}'`}
+                      onClick={() => {
+                        console.log("more");
+                      }}
+                    >
+                      {`{ more tags }`}
+                    </button> */}
+                  </li>
+                  <li>
                     <a
                       href={result.link}
                       target="_blank"
@@ -125,11 +136,11 @@ function App() {
                     >
                       {result.link}
                     </a>
-                  </div>
-                </li>
-              </ul>
-            </li>
-          ))}
+                  </li>
+                </ul>
+              </li>
+            );
+          })}
         </ul>
       </main>
     </div>

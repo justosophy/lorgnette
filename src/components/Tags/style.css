@@ -1,0 +1,18 @@
+.tag-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 0.85em;
+  padding: 0.4em 0.5em;
+}
+
+.tag-button:focus,
+.tag-button:hover {
+  outline: none;
+  text-decoration: underline;
+  color: dodgerblue;
+}
+
+.tag-button:active {
+  color: #ff0084;
+}
