@@ -5,11 +5,10 @@
 .*serviceWorker.js
 
 [include]
+.*/node_modules/decoders/.*
 
 [libs]
-./lib
-
-[lints]
+./node_modules/decoders/.*
 
 [options]
 all=true

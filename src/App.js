@@ -16,11 +16,17 @@ import Logo from "./components/Logo";
 import SearchInput from "./components/SearchInput";
 import Tags from "./components/Tags";
 
+import type { SearchRecord } from "./data/types";
+
 type HeaderRef = {| current: null |} | HTMLElement | null;
 
 function App() {
   const [searchTerm, updateSearchTerm] = useState("");
-  const [searchResults, updateSearchResults] = useState([]);
+  
+  const searchState = useState([]);
+  const searchResults: Array<SearchRecord> = searchState[0];
+  const updateSearchResults: (Array<SearchRecord> => void) = searchState[1];
+
   const [emptyResults, updateEmptyResults] = useState(false);
   const [online, updateOnline] = useState(true);
 
@@ -62,13 +68,17 @@ function App() {
       <main className="search-results">
         <ul>
           {searchResults.map(result => {
-            const author = result.author.match(/"([^"]+)"/)[1];
+            const authorMatch = result.author.match(/"([^"]+)"/);
+            let author = 'flickr user';
+            if (authorMatch && typeof authorMatch[1] === 'string') {
+              author = authorMatch[1];
+            }
             const dateString = formatDate(
               parseDate(result.date_taken),
               "MMMM D YYYY"
             );
             return (
-              <li key={result.media.m}>
+              <li key={result.thumbnail}>
                 <ul className="result-details">
                   <li className="result-thumbnail">
                     <a
@@ -77,7 +87,7 @@ function App() {
                       rel="noopener noreferrer"
                       title={`View image "${result.title}"`}
                     >
-                      <img src={result.media.m} alt={result.title} />
+                      <img src={result.thumbnail} alt={result.title} />
                     </a>
                   </li>
                   <li>
@@ -96,9 +106,12 @@ function App() {
                   <li>
                     <Tags
                       title={result.title}
-                      tagsList={result.tags.split(" ")}
+                      tagsList={result.tags}
                       maxLength={10}
                       handler={tag => {
+                        if (!window.navigator.onLine) {
+                          return;
+                        }
                         if (header instanceof HTMLElement) {
                           header.scrollIntoView();
                         }
