@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/lorgnette/precache-manifest.86885ada8bce885b6c799c14d9a3e225.js"
+  "/lorgnette/precache-manifest.5095db0c1063cc08ac35fa88e529205a.js"
 );
 
 self.addEventListener('message', (event) => {
