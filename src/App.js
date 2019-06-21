@@ -20,6 +20,8 @@ function App() {
   const [searchTerm, updateSearchTerm] = useState("");
   const [searchResults, updateSearchResults] = useState([]);
   const [emptyResults, updateEmptyResults] = useState(false);
+  const [online, updateOnline] = useState(true);
+  const [initialLoad, updateInitalLoad] = useState(true);
 
   let header: HeaderRef = useRef(null);
 
@@ -30,13 +32,28 @@ function App() {
   /* eslint-disable react-hooks/exhaustive-deps */
   useEffect(() => {
     if (searchTerm.trim().length !== 0 && searchResults.length === 0) {
-      console.log("bad result", { searchResults });
       updateEmptyResults(true);
     } else {
       updateEmptyResults(false);
     }
   }, [searchResults]);
   /* eslint-enable react-hooks/exhaustive-deps */
+
+  useEffect(() => {
+    if (!initialLoad) {
+      return;
+    }
+    updateInitalLoad(true);
+    updateOnline(window.navigator.onLine);
+
+    const handleNetworkChange = () => {
+      updateOnline(window.navigator.onLine);
+    };
+
+    // Add our event listeners
+    window.addEventListener("online", handleNetworkChange, false);
+    window.addEventListener("offline", handleNetworkChange, false);
+  }, [initialLoad]);
 
   return (
     <div className="App">
@@ -47,15 +64,20 @@ function App() {
         ref={el => (header = el)}
       >
         <div className="App-lockup">
-          <Logo />
+          <Logo closed={!online} />
           <SearchInput
             value={searchTerm}
             onChange={(event: SyntheticInputEvent<HTMLInputElement>) => {
               if (event.currentTarget instanceof HTMLInputElement) {
-                updateSearchTerm(event.currentTarget.value);
+                if (window.navigator.onLine === false) {
+                  updateOnline(false)
+                } else {
+                  updateSearchTerm(event.currentTarget.value);
+                }
               }
             }}
             badState={emptyResults}
+            disabled={!online}
           />
         </div>
       </header>
@@ -63,6 +85,10 @@ function App() {
         <ul>
           {searchResults.map(result => {
             const author = result.author.match(/"([^"]+)"/)[1];
+            const dateString = formatDate(
+              parseDate(result.date_taken),
+              "MMMM D YYYY"
+            );
             return (
               <li key={result.media.m}>
                 <ul className="result-details">
@@ -85,48 +111,22 @@ function App() {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {result.author.match(/"([^"]+)"/)[1]}
+                      {author}
                     </a>{" "}
-                    on {formatDate(parseDate(result.date_taken), "MMMM D YYYY")}
+                    on {dateString}
                   </li>
                   <li>
-                    {/* {result.tags.split(" ").map(tag => (
-                      <button
-                        type="button"
-                        title={`Search for '${tag}'`}
-                        onClick={() => {
-                          if (header instanceof HTMLElement) {
-                            header.scrollIntoView();
-                          }
-                          updateSearchTerm(tag);
-                        }}
-                        key={tag}
-                      >
-                        {tag}
-                      </button>
-                    ))} */}
                     <Tags
                       title={result.title}
                       tagsList={result.tags.split(" ")}
                       maxLength={10}
-                      handler={
-                        tag => {
-                          if (header instanceof HTMLElement) {
-                            header.scrollIntoView();
-                          }
-                          updateSearchTerm(tag);
+                      handler={tag => {
+                        if (header instanceof HTMLElement) {
+                          header.scrollIntoView();
                         }
-                      }
-                    />
-                    {/* <button
-                      type="button"
-                      title={`More tags for '${result.title}'`}
-                      onClick={() => {
-                        console.log("more");
+                        updateSearchTerm(tag);
                       }}
-                    >
-                      {`{ more tags }`}
-                    </button> */}
+                    />
                   </li>
                   <li>
                     <a

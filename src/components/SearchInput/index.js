@@ -5,7 +5,8 @@ import "./style.css";
 type SearchInputProps = {|
   value: string,
   onChange: Function,
-  badState?: boolean
+  badState?: boolean,
+  disabled?: boolean
 |};
 
 type InputRef = {| current: null |} | HTMLInputElement | null;
@@ -13,7 +14,8 @@ type InputRef = {| current: null |} | HTMLInputElement | null;
 const SearchInput = ({
   value,
   onChange,
-  badState = false
+  badState = false,
+  disabled = false
 }: SearchInputProps) => {
   let input: InputRef = useRef(null);
 
@@ -28,20 +30,23 @@ const SearchInput = ({
 
   return (
     <div className="search-input-container">
-      <input
-        type="search"
-        id="search-input"
-        className={classnames("search-input", {
-          "search-input--bad-state": !!badState
-        })}
-        name="q"
-        aria-label="Search flickr"
-        ref={el => (input = el)}
-        placeholder="Search flickr"
-        maxLength={50}
-        value={value}
-        onChange={onChange}
-      />
+      <div>
+        <input
+          type="search"
+          id="search-input"
+          className={classnames("search-input", {
+            "search-input--bad-state": !!badState
+          })}
+          name="q"
+          aria-label={"Search flickr"}
+          ref={el => (input = el)}
+          placeholder={"Search flickr"}
+          maxLength={50}
+          value={disabled ? "search offline" : value}
+          onChange={onChange}
+          disabled={disabled}
+        />
+      </div>
     </div>
   );
 };

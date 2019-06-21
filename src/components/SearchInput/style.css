@@ -8,11 +8,22 @@
   border-radius: 1rem;
   outline: none;
   box-shadow: inset 2px 2px 12px hsla(220, 13%, 5%, 0.5);
-  transition: 0.2s color;
+  transition: 0.2s color, box-shadow 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.search-input:disabled {
+  color: #555;
+  box-shadow: inset 2px 2px 12px hsla(220, 13%, 5%, 0.2);
 }
 
 .search-input.search-input--bad-state {
   color: #FF0084;
+}
+
+.search-input.search-input--bad-state:disabled {
+  color: #555;
 }
 
 .search-input::placeholder {

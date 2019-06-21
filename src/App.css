@@ -79,9 +79,11 @@
 }
 
 .result-details a img {
+  display: inline-block;
   min-width: 160px;
   min-height: 160px;
   border: solid 1px transparent;
+  box-shadow: 0 0 8px hsla(220, 13%, 5%, 0.75);
 }
 
 .result-details a:focus img {

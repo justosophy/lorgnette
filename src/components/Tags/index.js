@@ -18,7 +18,6 @@ const Tags = (props: TagsProps) => {
 
   const renderMoreButton = len > maxLength && showMore;
 
-  console.log("taaags");
   return (
     <>
       {tagsList.slice(0, renderMoreButton ? maxLength : len).map(tag => (

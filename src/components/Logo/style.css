@@ -2,3 +2,19 @@
     pointer-events: none;
     max-width: 50vh;
 }
+
+.logo .logo-circle-eye {
+    transform-origin: 100% 66%;
+    transform: scaleY(1);
+    stroke: hsla(220, 13%, 5%, 0.35);
+    stroke-width: 0.6;
+    stroke-opacity: 1;
+    transition: transform 0.3s, fill 0.3s, stroke-opacity 0.3s;
+}
+
+.logo.closed .logo-circle-eye {
+    transform-origin: 100% 66%;
+    fill: hsla(220, 13%, 5%, 0.75);
+    transform: scaleY(0.4);
+    stroke-opacity: 0;
+}

@@ -11,8 +11,7 @@ const doSearch = async (
   if (search.length === 0) {
     return;
   }
-
-  // console.log({ search });
+ 
   const url = "https://www.flickr.com/services/feeds/photos_public.gne";
 
   const obj = {
@@ -27,17 +26,15 @@ const doSearch = async (
       { name: "jsonFlickrFeed" },
       function(err, data) {
         if (err) {
-          // console.log({ err })
           updateSearchResults([]);
           return;
         }
-        //   console.log({ data })
         updateSearchResults(data.items);
       },
       { timeout: 10000 }
     );
   } catch (e) {
-    console.log("dude");
+    updateSearchResults([]);
   }
 };
 
