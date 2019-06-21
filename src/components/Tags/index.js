@@ -21,7 +21,7 @@ const Tags = (props: TagsProps) => {
   const renderMoreButton = len > maxLength && showMore;
 
   return (
-    <>
+    <div>
       {tagsList.slice(0, renderMoreButton ? maxLength : len).map(tag => (
         <button
           className="tag-button"
@@ -45,7 +45,7 @@ const Tags = (props: TagsProps) => {
           {'{ more tags.. }'}
         </button>
       )}
-    </>
+    </div>
   );
 };
 

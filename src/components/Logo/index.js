@@ -3,10 +3,10 @@ import classnames from 'classnames';
 import './style.css';
 
 type LogoProps = {
-  closed: boolean
+  closed?: boolean
 };
 
-const Logo = ({ closed }: LogoProps) => (
+const Logo = ({ closed = false }: LogoProps) => (
   <svg
     className={classnames('logo', { closed })}
     xmlns="http://www.w3.org/2000/svg"

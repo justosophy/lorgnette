@@ -41,6 +41,7 @@ function App() {
 
   return (
     <div className="App">
+      <h1>Lorgnette | flickr public search</h1>
       <header
         className={classnames('App-header', {
           'App-header-results': searchResults.length > 0,
