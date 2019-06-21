@@ -2,6 +2,8 @@
 
 > Single page search app for public flickr feeds
 
+View demo at [https://justosophy.github.io/lorgnette/](https://justosophy.github.io/lorgnette/)
+
 ## Available Scripts
 
 In the project directory, you can run:
