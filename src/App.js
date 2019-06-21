@@ -8,7 +8,9 @@ import { parse as parseDate, format as formatDate } from "date-fns";
 
 import "./App.css";
 
-import { debouncedSearch } from "./data";
+import onTypingEffect from "./effects/on-typing";
+import onSearchResultsEffect from "./effects/on-searchresults";
+import onInitialLoadEffect from "./effects/on-initialload";
 
 import Logo from "./components/Logo";
 import SearchInput from "./components/SearchInput";
@@ -21,39 +23,15 @@ function App() {
   const [searchResults, updateSearchResults] = useState([]);
   const [emptyResults, updateEmptyResults] = useState(false);
   const [online, updateOnline] = useState(true);
-  const [initialLoad, updateInitalLoad] = useState(true);
 
   let header: HeaderRef = useRef(null);
 
-  useEffect(() => {
-    debouncedSearch(searchTerm, updateSearchResults);
-  }, [searchTerm]);
-
-  /* eslint-disable react-hooks/exhaustive-deps */
-  useEffect(() => {
-    if (searchTerm.trim().length !== 0 && searchResults.length === 0) {
-      updateEmptyResults(true);
-    } else {
-      updateEmptyResults(false);
-    }
-  }, [searchResults]);
-  /* eslint-enable react-hooks/exhaustive-deps */
-
-  useEffect(() => {
-    if (!initialLoad) {
-      return;
-    }
-    updateInitalLoad(true);
-    updateOnline(window.navigator.onLine);
-
-    const handleNetworkChange = () => {
-      updateOnline(window.navigator.onLine);
-    };
-
-    // Add our event listeners
-    window.addEventListener("online", handleNetworkChange, false);
-    window.addEventListener("offline", handleNetworkChange, false);
-  }, [initialLoad]);
+  useEffect(onTypingEffect(searchTerm, updateSearchResults), [searchTerm]);
+  useEffect(
+    onSearchResultsEffect(searchTerm, searchResults, updateEmptyResults),
+    [searchResults]
+  );
+  useEffect(onInitialLoadEffect(updateOnline), []);
 
   return (
     <div className="App">
@@ -70,7 +48,7 @@ function App() {
             onChange={(event: SyntheticInputEvent<HTMLInputElement>) => {
               if (event.currentTarget instanceof HTMLInputElement) {
                 if (window.navigator.onLine === false) {
-                  updateOnline(false)
+                  updateOnline(false);
                 } else {
                   updateSearchTerm(event.currentTarget.value);
                 }
