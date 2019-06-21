@@ -1,8 +1,8 @@
 /* eslint-disable no-use-before-define */
 // ^ not necessary for flowtype declaration
 
-const Ok = "Ok";
-const Err = "Err";
+const Ok = 'Ok';
+const Err = 'Err';
 
 export type Result<E, T> =
   | { type: typeof Ok, value: T }

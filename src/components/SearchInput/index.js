@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from "react";
-import classnames from "classnames";
-import "./style.css";
+import React, { useRef, useEffect, useState } from 'react';
+import classnames from 'classnames';
+import './style.css';
 
 type SearchInputProps = {|
   value: string,
@@ -15,7 +15,7 @@ const SearchInput = ({
   value,
   onChange,
   badState = false,
-  disabled = false
+  disabled = false,
 }: SearchInputProps) => {
   let input: InputRef = useRef(null);
 
@@ -34,15 +34,15 @@ const SearchInput = ({
         <input
           type="search"
           id="search-input"
-          className={classnames("search-input", {
-            "search-input--bad-state": !!badState
+          className={classnames('search-input', {
+            'search-input--bad-state': !!badState,
           })}
           name="q"
-          aria-label={"Search flickr"}
-          ref={el => (input = el)}
-          placeholder={"Search flickr"}
+          aria-label="Search flickr"
+          ref={(el) => { (input = el); }}
+          placeholder="Search flickr"
           maxLength={50}
-          value={disabled ? "search offline" : value}
+          value={disabled ? 'search offline' : value}
           onChange={onChange}
           disabled={disabled}
         />

@@ -1,4 +1,4 @@
-import { object, string, array } from "decoders";
+import { object, string, array } from 'decoders';
 
 const apiResponseDecoder = object({
   items: array(
@@ -9,9 +9,9 @@ const apiResponseDecoder = object({
       link: string,
       tags: string,
       media: object({ m: string }),
-      title: string
-    })
-  )
+      title: string,
+    }),
+  ),
 });
 
 export { apiResponseDecoder };

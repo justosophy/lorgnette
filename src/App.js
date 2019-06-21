@@ -1,28 +1,28 @@
 // @flow
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from 'react';
 
-import classnames from "classnames";
+import classnames from 'classnames';
 
-import { parse as parseDate, format as formatDate } from "date-fns";
+import { parse as parseDate, format as formatDate } from 'date-fns';
 
-import "./App.css";
+import './App.css';
 
-import onTypingEffect from "./effects/on-typing";
-import onSearchResultsEffect from "./effects/on-searchresults";
-import onInitialLoadEffect from "./effects/on-initialload";
+import onTypingEffect from './effects/on-typing';
+import onSearchResultsEffect from './effects/on-searchresults';
+import onInitialLoadEffect from './effects/on-initialload';
 
-import Logo from "./components/Logo";
-import SearchInput from "./components/SearchInput";
-import Tags from "./components/Tags";
+import Logo from './components/Logo';
+import SearchInput from './components/SearchInput';
+import Tags from './components/Tags';
 
-import type { SearchRecord } from "./data/types";
+import type { SearchRecord } from './data/types';
 
 type HeaderRef = {| current: null |} | HTMLElement | null;
 
 function App() {
-  const [searchTerm, updateSearchTerm] = useState("");
-  
+  const [searchTerm, updateSearchTerm] = useState('');
+
   const searchState = useState([]);
   const searchResults: Array<SearchRecord> = searchState[0];
   const updateSearchResults: (Array<SearchRecord> => void) = searchState[1];
@@ -35,23 +35,23 @@ function App() {
   useEffect(onTypingEffect(searchTerm, updateSearchResults), [searchTerm]);
   useEffect(
     onSearchResultsEffect(searchTerm, searchResults, updateEmptyResults),
-    [searchResults]
+    [searchResults],
   );
   useEffect(onInitialLoadEffect(updateOnline), []);
 
   return (
     <div className="App">
       <header
-        className={classnames("App-header", {
-          "App-header-results": searchResults.length > 0
+        className={classnames('App-header', {
+          'App-header-results': searchResults.length > 0,
         })}
-        ref={el => (header = el)}
+        ref={(el) => { (header = el); }}
       >
         <div className="App-lockup">
           <Logo closed={!online} />
           <SearchInput
             value={searchTerm}
-            onChange={(event: SyntheticInputEvent<HTMLInputElement>) => {
+            onChange={(event) => {
               if (event.currentTarget instanceof HTMLInputElement) {
                 if (window.navigator.onLine === false) {
                   updateOnline(false);
@@ -67,7 +67,7 @@ function App() {
       </header>
       <main className="search-results">
         <ul>
-          {searchResults.map(result => {
+          {searchResults.map((result) => {
             const authorMatch = result.author.match(/"([^"]+)"/);
             let author = 'flickr user';
             if (authorMatch && typeof authorMatch[1] === 'string') {
@@ -75,7 +75,7 @@ function App() {
             }
             const dateString = formatDate(
               parseDate(result.date_taken),
-              "MMMM D YYYY"
+              'MMMM D YYYY',
             );
             return (
               <li key={result.thumbnail}>
@@ -91,7 +91,8 @@ function App() {
                     </a>
                   </li>
                   <li>
-                    by{" "}
+                    by
+                    {' '}
                     <a
                       href={`https://www.flickr.com/photos/${
                         result.author_id
@@ -100,15 +101,18 @@ function App() {
                       rel="noopener noreferrer"
                     >
                       {author}
-                    </a>{" "}
-                    on {dateString}
+                    </a>
+                    {' '}
+                    on
+                    {' '}
+                    {dateString}
                   </li>
                   <li>
                     <Tags
                       title={result.title}
                       tagsList={result.tags}
                       maxLength={10}
-                      handler={tag => {
+                      handler={(tag) => {
                         if (!window.navigator.onLine) {
                           return;
                         }

@@ -1,14 +1,14 @@
-import React from "react";
-import classnames from "classnames";
-import "./style.css";
+import React from 'react';
+import classnames from 'classnames';
+import './style.css';
 
 type LogoProps = {
   closed: boolean
 };
 
-const Logo = (props: LogoProps) => (
+const Logo = ({ closed }: LogoProps) => (
   <svg
-    className={classnames("logo", { closed: props.closed })}
+    className={classnames('logo', { closed })}
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 32 32"
   >

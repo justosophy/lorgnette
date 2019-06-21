@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import "./style.css"
+import './style.css';
 
 type TagsProps = {
   tagsList: string[],
@@ -10,7 +10,9 @@ type TagsProps = {
 };
 
 const Tags = (props: TagsProps) => {
-  const { tagsList, maxLength = 20, handler, title } = props;
+  const {
+    tagsList, maxLength = 20, handler, title,
+  } = props;
 
   const [showMore, updateShowMore] = useState(true);
 
@@ -40,7 +42,7 @@ const Tags = (props: TagsProps) => {
             updateShowMore(false);
           }}
         >
-          {`{ more tags.. }`}
+          {'{ more tags.. }'}
         </button>
       )}
     </>
